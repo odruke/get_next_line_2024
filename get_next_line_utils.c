@@ -6,7 +6,7 @@
 /*   By: odruke-s <odruke-s@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/10 12:55:43 by odruke-s          #+#    #+#             */
-/*   Updated: 2024/11/13 22:37:12 by odruke-s         ###   ########.fr       */
+/*   Updated: 2024/11/14 20:44:07 by odruke-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,8 @@ char	*ft_strjoin(char *s1, char *s2)
 	b = 0;
 	if (!s2)
 		return (NULL);
+	if (!s1)
+		s1 = ft_calloc(BUFFER_SIZE, sizeof(char));
 	res = ft_calloc((ft_strlen(s1) + ft_strlen(s2) + 1), sizeof(char));
 	if (!res)
 		return (NULL);

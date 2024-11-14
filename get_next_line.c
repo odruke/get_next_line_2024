@@ -6,7 +6,7 @@
 /*   By: odruke-s <odruke-s@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/09 15:33:13 by odruke-s          #+#    #+#             */
-/*   Updated: 2024/11/13 22:23:43 by odruke-s         ###   ########.fr       */
+/*   Updated: 2024/11/14 22:02:56 by odruke-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,8 @@ char	*next_line(char *old_buff)
 	i++;
 	while (old_buff[i] && old_buff[i] != '\n')
 		new_buff[b++] = old_buff[i++];
+	if (old_buff[i] == '\n')
+		new_buff[b] = '\n';
 	free(old_buff);
 	return (new_buff);
 }
@@ -43,6 +45,8 @@ char	*get_line(char *buffer)
 	int		i;
 
 	i = 0;
+	if (!buffer[i])
+		return (NULL);
 	while (buffer[i] && buffer[i] != '\n')
 		i++;
 	line = ft_calloc(i + 1, sizeof(char));
@@ -68,7 +72,7 @@ char	*read_raw(int fd, char *buffer)
 	if (!read_buff)
 		return (NULL);
 	read_count = 1;
-	while (read_count > 0 && !ft_strchr(buffer, '\n'))
+	while (read_count > 0)
 	{
 		read_count = read(fd, read_buff, BUFFER_SIZE);
 		if (read_count < 0)
@@ -77,8 +81,11 @@ char	*read_raw(int fd, char *buffer)
 			return (NULL);
 		}
 		read_buff[read_count] = 0;
-		ft_strjoin(buffer, read_buff);
+		buffer = ft_strjoin(buffer, read_buff);
+		if (ft_strchr(buffer, '\n'))
+			break ;
 	}
+	free(read_buff);
 	return (buffer);
 }
 char	*get_next_line(int fd)
