@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line_utils.c                              :+:      :+:    :+:   */
+/*   get_next_line_utils_bonus.c                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: odruke-s <odruke-s@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/10 12:55:43 by odruke-s          #+#    #+#             */
-/*   Updated: 2024/11/15 21:30:10 by odruke-s         ###   ########.fr       */
+/*   Updated: 2024/11/15 21:29:05 by odruke-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,6 @@ char	*ft_strjoin(char *old_buffer, char *read_buff)
 	b = 0;
 	while (read_buff[b])
 		read_buff[b++] = 0;
-	free(old_buffer);
+	free (old_buffer);
 	return (new_buffer);
 }

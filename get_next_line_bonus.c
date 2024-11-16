@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*   get_next_line_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: odruke-s <odruke-s@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/09 15:33:13 by odruke-s          #+#    #+#             */
-/*   Updated: 2024/11/15 22:05:41 by odruke-s         ###   ########.fr       */
+/*   Updated: 2024/11/15 22:05:35 by odruke-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,13 +91,13 @@ static char	*read_raw(int fd, char *buffer)
 
 char	*get_next_line(int fd)
 {
-	static char	*buffer;
+	static char	*buffer[OPEN_MAX];
 	char		*line;
 
 	if (fd < 0 || BUFFER_SIZE <= 0 || read(fd, 0, 0) < 0)
 		return (NULL);
-	buffer = read_raw(fd, buffer);
-	line = get_line(buffer);
-	buffer = next_line(buffer);
+	buffer[fd] = read_raw(fd, buffer[fd]);
+	line = get_line(buffer[fd]);
+	buffer[fd] = next_line(buffer[fd]);
 	return (line);
 }
